@@ -9,20 +9,9 @@ datasource db {
 }
 
 model Amenity {
-  id              String            @id @default(uuid())
-  name            String
-  properties      Property[]
-  PropertyAmenity PropertyAmenity[]
-}
-
-model PropertyAmenity {
-  propertyId String
-  amenityId  String
-  Property   Property @relation(fields: [propertyId], references: [id])
-  Amenity    Amenity  @relation(fields: [amenityId], references: [id])
-
-  @@id([amenityId])
-  @@index([propertyId])
+  id         String     @id @default(uuid())
+  name       String
+  properties Property[]
 }
 
 model Booking {
@@ -54,21 +43,21 @@ model Host {
 }
 
 model Property {
-  id              String            @id @default(uuid())
-  title           String
-  description     String
-  location        String
-  pricePerNight   Int
-  bedroomCount    Int
-  bathRoomCount   Int
-  maxGuestCount   Int
-  hostId          String
-  rating          Int
-  bookings        Booking[]
-  reviews         Review[]
-  amenities       Amenity[]
-  PropertyAmenity PropertyAmenity[]
-  Host            Host              @relation(fields: [hostId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  id            String    @id @default(uuid())
+  title         String
+  description   String
+  location      String
+  pricePerNight Int
+  bedroomCount  Int
+  bathRoomCount Int
+  maxGuestCount Int
+  hostId        String
+  rating        Int
+  bookings      Booking[]
+  reviews       Review[]
+  amenities     Amenity[]
+
+  Host Host @relation(fields: [hostId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@index([hostId])
 }
