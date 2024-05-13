@@ -10,7 +10,8 @@ import notFoundErrorHandler from '../middleware/notFoundErrorHandler.js';
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-	const users = await getUsers();
+	const { email, username } = req.query;
+	const users = await getUsers(email, username);
 	res.status(200).json(users);
 });
 

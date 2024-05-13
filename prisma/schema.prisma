@@ -47,7 +47,7 @@ model Property {
   title         String
   description   String
   location      String
-  pricePerNight Int
+  pricePerNight Float
   bedroomCount  Int
   bathRoomCount Int
   maxGuestCount Int

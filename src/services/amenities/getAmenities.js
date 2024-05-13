@@ -7,6 +7,7 @@ const getAmenities = async (name) => {
 		where: {
 			name,
 		},
+		include: { properties: true },
 	});
 };
 
