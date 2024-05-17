@@ -4,10 +4,12 @@ const getProperties = async (pricePerNight, location) => {
 	const prisma = new PrismaClient();
 	return prisma.property.findMany({
 		where: {
-			location: {
-				contains: location,
-			},
-			pricePerNight,
+			...(pricePerNight && location
+				? {
+						location: { contains: location },
+						pricePerNight: parseFloat(pricePerNight),
+				  }
+				: {}),
 		},
 		include: {
 			amenities: true,
