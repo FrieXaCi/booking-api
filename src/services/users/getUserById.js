@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import bcrypt from 'bcrypt';
 
 const getUserById = async (id) => {
 	const prisma = new PrismaClient();
@@ -7,6 +8,11 @@ const getUserById = async (id) => {
 			id,
 		},
 	});
+
+	if (user && user.password) {
+		const hashedPassword = await bcrypt.hash(user.password, 10);
+		user.password = hashedPassword;
+	}
 
 	return user;
 };

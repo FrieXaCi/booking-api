@@ -11,6 +11,7 @@ const updateUserById = async (
 	profilePicture
 ) => {
 	const prisma = new PrismaClient();
+
 	const updatedUser = await prisma.user.updateMany({
 		where: {
 			id,
@@ -24,12 +25,13 @@ const updateUserById = async (
 			profilePicture,
 		},
 	});
+
 	if (updatedUser.count > 0) {
 		return {
-			message: `Review with id ${id} was updated!`,
+			message: `User with id ${id} was updated!`,
 		};
 	} else {
-		throw new NotFoundError('Review', id);
+		throw new NotFoundError('User', id);
 	}
 };
 

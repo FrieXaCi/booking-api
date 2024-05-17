@@ -6,6 +6,9 @@ const getPropertyById = async (id) => {
 		where: {
 			id,
 		},
+		include: {
+			amenities: true,
+		},
 	});
 
 	return property;
